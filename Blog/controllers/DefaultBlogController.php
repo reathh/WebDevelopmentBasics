@@ -27,5 +27,10 @@ class DefaultBlogController extends \GF\DefaultController {
 
         $this->view->user = array('isLoggedIn' => $this->userModel->isUserLoggedIn());
         $this->view->appendToLayout('user', 'header');
+
+        $tags = $this->tagModel->getAllTags();
+        $this->view->tags = $tags;
+        $this->view->appendToLayout('tags', 'tags');
+
     }
 }

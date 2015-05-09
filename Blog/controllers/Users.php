@@ -11,7 +11,7 @@ class Users extends DefaultBlogController {
             Common::redirect($this->config->app['rootUrl']);
         }
         $this->view->appendToLayout('body', 'register');
-        $this->view->display('layouts.user');
+        $this->view->display('layouts.default');
     }
 
     public function login() {
@@ -24,7 +24,7 @@ class Users extends DefaultBlogController {
             }
         }
         $this->view->appendToLayout('body', 'login');
-        $this->view->display('layouts.user');
+        $this->view->display('layouts.default');
     }
 
 

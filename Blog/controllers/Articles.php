@@ -26,15 +26,13 @@ class Articles extends \Controllers\DefaultBlogController {
         $articles = $this->articleModel->getAllArticlesByTagName($tagName);
         $this->prepareArticlesForView($articles);
 
-        $this->view->display('layouts.search');
+        $this->view->display('layouts.default');
     }
 
     private function showAllArticles()
     {
         $articles = $this->articleModel->getAllArticles();
         $this->prepareArticlesForView($articles);
-
-        $this->attachTagsToView();
 
         $this->view->display('layouts.default');
     }
@@ -46,7 +44,6 @@ class Articles extends \Controllers\DefaultBlogController {
         $this->view->article = $article;
 
         $this->view->appendToLayout('body', 'article');
-        $this->attachTagsToView();
 
         $this->view->display('layouts.default');
     }
@@ -62,13 +59,7 @@ class Articles extends \Controllers\DefaultBlogController {
         $this->view->appendToLayout('body', 'articles');
     }
 
-    private function attachTagsToView()
-    {
-        $tags = $this->tagModel->getAllTags();
 
-        $this->view->tags = $tags;
-        $this->view->appendToLayout('tags', 'tags');
-    }
 
     private function prepareTagsForView(&$article) {
         $article['tags'] = array_filter(explode(',',  $article['tags']));
