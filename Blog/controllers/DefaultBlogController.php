@@ -19,13 +19,20 @@ class DefaultBlogController extends \GF\DefaultController {
      */
     protected $userModel;
 
+
+    /**
+     * @var \Models\Comment
+     */
+    protected $commentModel;
+
     public function __construct() {
         parent::__construct();
         $this->articleModel = new \Models\Article();
         $this->tagModel = new \Models\Tag();
         $this->userModel = new \Models\User();
+        $this->commentModel = new \Models\Comment();
 
-        $this->view->user = array('isLoggedIn' => $this->userModel->isUserLoggedIn());
+        $this->view->user = array('isLoggedIn' => $this->userModel->isUserLoggedIn(), 'data' => $this->userModel->getCurrentlyLoggedUser());
         $this->view->appendToLayout('user', 'header');
 
         $tags = $this->tagModel->getAllTags();

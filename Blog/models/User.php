@@ -51,4 +51,8 @@ class User extends \GF\DB\SimpleDB {
 
         return (bool) $isAdmin;
     }
+
+    public function logout() {
+        $this->app->getSession()->destroySession();
+    }
 }

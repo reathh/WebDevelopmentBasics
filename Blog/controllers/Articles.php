@@ -38,11 +38,15 @@ class Articles extends \Controllers\DefaultBlogController {
     }
 
     private function showArticleById($id) {
+        if ($this->input->post('content')) {
+            
+        }
         $article = $this->articleModel->getArticleById($id);
+        $articleComments = $this->commentModel->getCommentsForArticle($id);
         $this->prepareTagsForView($article);
 
         $this->view->article = $article;
-
+        $this->view->comments = $articleComments;
         $this->view->appendToLayout('body', 'article');
 
         $this->view->display('layouts.default');

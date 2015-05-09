@@ -27,5 +27,9 @@ class Users extends DefaultBlogController {
         $this->view->display('layouts.default');
     }
 
+    public function logout() {
+        $this->userModel->logout();
+        Common::redirect($this->config->app['rootUrl']);
+    }
 
 }

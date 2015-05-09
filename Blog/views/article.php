@@ -7,3 +7,39 @@ if (count($this->article['tags']) != 0) : ?>
         <a href="/index.php/Articles/tags/<?=$tag?>"><?=$tag?></a>
     <?php endforeach; echo '</div>'; endif; ?>
 <div><?=$this->article['content']?></div>
+<div class="comments">
+    <?php foreach ($this->comments as $comment) : ?>
+        <div class="comment">
+            <div class="user-data">
+                Name: <span class="name"><?=$comment['name']?></span>
+                <?php if ($comment['email']) : ?> - Email: <span class="email"><?=$comment['email']?></span> <?php endif ?>
+            </div>
+            <div class="comment-content">
+                <?=$comment['content']?>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+<div class="add-comment">
+    <form method="post">
+
+    <?php if ($this->user['isLoggedIn']) : ?>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required></textarea>
+        <input type="submit"/>
+    <?php else : ?>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+        </div>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required></textarea>
+        <input type="submit"/>
+    <?php endif ?>
+
+    </form>
+</div>
