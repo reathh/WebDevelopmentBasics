@@ -1,4 +1,4 @@
-.articles .article>div.tags>span {
+.tags>span {
     color: gray;
     font-size: 0.8em;
 }
@@ -7,7 +7,19 @@
     margin-bottom: 15px;
 }
 .articles .article .title {
+    color: dodgerblue;
+    text-decoration: none;
+}
+.articles .article .title, .articles .article .title * {
     margin-bottom: 0;
+}
+.tags {
+    margin-bottom: 10px;
+}
+.articles .article .title:hover {
+    margin-bottom: 0;
+    color: blue;
+    text-decoration: underline;
 }
 #default, aside {
     display: inline-block;

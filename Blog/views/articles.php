@@ -4,17 +4,18 @@ if (count($this->articles) != 0) :
 foreach($this->articles as $article) : ?>
 
     <div class="article">
-        <h2 class="title"><?=$article['title']?></h2>
+        <a href="/index.php/Articles/view/<?=$article['id']?>" class="title"><h2><?=$article['title']?></h2></a>
+
+
+        <?php
+        if (count($article['tags']) != 0) : ?>
         <div class="tags">
             <span>Tags:</span>
-
-            <?php
-            if (count($article['tags']) == 0) :
-                echo 'None';
-            else:
-                foreach($article['tags'] as $tag) : ?>
+                <?php foreach($article['tags'] as $tag) : ?>
                     <a href="/index.php/Articles/tags/<?=$tag?>"><?=$tag?></a>
-                <?php endforeach; endif; ?>
+                <?php endforeach; echo '</div>'; endif; ?>
+        <div class="content">
+            <?=$article['content']?>
         </div>
     </div>
 
