@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of DefaultController
- *
- * @author gatakka
- */
-
 namespace GF;
 
 class DefaultController {
@@ -36,16 +25,12 @@ class DefaultController {
      */
     public $input;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->app = \GF\App::getInstance();
         $this->view = \GF\View::getInstance();
         $this->config = $this->app->getConfig();
         $this->input = \GF\InputData::getInstance();
     }
-    
-    public function jsonResponse(){
-        
-    }
-
 }
 

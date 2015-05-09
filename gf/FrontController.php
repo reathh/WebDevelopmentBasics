@@ -70,7 +70,7 @@ class FrontController {
             if ($_params[1]) {
                 $this->method=strtolower($_params[1]);   
                 unset($_params[0],$_params[1]);
-                $input->setGet(array_values($_params));                
+                $input->setGet(array_values($_params));
             } else {
                 $this->method=$this->getDefaultMethod();                
             }

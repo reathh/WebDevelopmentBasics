@@ -34,9 +34,9 @@ class SimpleDB {
     
     /**
      * 
-     * @param type $sql
-     * @param type $params
-     * @param type $pdoOptions
+     * @param string $sql
+     * @param array $params
+     * @param array $pdoOptions
      * @return \GF\DB\SimpleDB
      */
     public function prepare($sql, $params = array(), $pdoOptions = array()) {

@@ -1,0 +1,22 @@
+.articles .article>div.tags>span {
+    color: gray;
+    font-size: 0.8em;
+}
+.articles .article {
+    border: 1px solid black;
+    margin-bottom: 15px;
+}
+.articles .article .title {
+    margin-bottom: 0;
+}
+#default, aside {
+    display: inline-block;
+}
+#default {
+    width: 80%;
+
+}
+aside {
+    width: 19%;
+    border: 1px solid black;
+}
