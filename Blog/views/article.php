@@ -6,7 +6,7 @@ if (count($this->article['tags']) != 0) : ?>
     <?php foreach($this->article['tags'] as $tag) : ?>
         <a href="/index.php/Articles/tags/<?=$tag?>"><?=$tag?></a>
     <?php endforeach; echo '</div>'; endif; ?>
-<div><?=$this->article['content']?></div>
+<div id="article-content"><?=$this->article['content']?></div>
 <div class="comments">
     <?php foreach ($this->comments as $comment) : ?>
         <div class="comment">
@@ -34,7 +34,7 @@ if (count($this->article['tags']) != 0) : ?>
         </div>
         <div>
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
+            <input type="email" id="email" name="email">
         </div>
         <label for="content">Content:</label>
         <textarea id="content" name="content" required></textarea>

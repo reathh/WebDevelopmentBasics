@@ -47,3 +47,9 @@ header>div #username {
 .comment .name, .comment .email {
     font-weight: bold;
 }
+#article-content {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}

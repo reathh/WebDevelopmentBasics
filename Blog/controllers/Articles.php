@@ -39,7 +39,11 @@ class Articles extends \Controllers\DefaultBlogController {
 
     private function showArticleById($id) {
         if ($this->input->post('content')) {
-            
+            try {
+                $this->addComment($id, $this->input->post('content'));
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
         }
         $article = $this->articleModel->getArticleById($id);
         $articleComments = $this->commentModel->getCommentsForArticle($id);
@@ -70,6 +74,36 @@ class Articles extends \Controllers\DefaultBlogController {
         $article['tags'] = array_map('trim', $article['tags']);
     }
 
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    private function addComment($id, $content)
+    {
+        if (strlen($content) < $this->config->blog['minimumLengthForComments']) {
+            throw new \Exception('Length of content too low.');
+        }
+
+        $name = null;
+        $email = null;
+
+
+        if (!$this->userModel->isUserLoggedIn()) {
+            $name = $this->input->post('name');
+            $email = $this->input->post('email');
+
+            if (!$name) {
+                throw new \Exception('No name provided for comment');
+            }
+        } else {
+            $name = $this->userModel->getCurrentlyLoggedUser()['username'];
+            $email = $this->userModel->getCurrentlyLoggedUser()['email'];
+
+        }
+
+        $this->commentModel->addComment($id, $name, $email, $content);
+
+    }
 
 
 }
