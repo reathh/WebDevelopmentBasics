@@ -53,7 +53,7 @@ header>div #username {
     padding: 10px;
     margin-bottom: 10px;
 }
-#add-article {
+#add-article, #edit-article {
     text-align: center;
 }
 header nav ul {

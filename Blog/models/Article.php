@@ -45,6 +45,29 @@ class Article extends \GF\DB\SimpleDB {
         $this->prepare("INSERT INTO articles (title, content) VALUES (?, ?)", array($title, $content))->execute();
         $articleId = $this->getLastInsertId();
 
+        $this->addTagsToArticle($tags, $articleId);
+    }
+
+    public function increaseViewsByOne($id) {
+        $this->prepare("UPDATE `articles` SET `visits`=visits + 1 WHERE id = ?", array($id))->execute();
+    }
+
+    public function deleteArticle($id) {
+        $this->prepare("DELETE FROM `articles` WHERE id = ?", array($id))->execute();
+    }
+
+    public function editArticle($id, $title, $tags, $content) {
+        $this->prepare("UPDATE `articles` SET `title`=?,`content`=? WHERE id=?", array($title, $content, $id))->execute();
+        $this->deleteTagsFromArticle($id);
+        $this->addTagsToArticle($tags, $id);
+    }
+
+    /**
+     * @param $tags
+     * @param $articleId
+     */
+    private function addTagsToArticle($tags, $articleId)
+    {
         $tags = array_filter(explode(", ", $tags));
         foreach ($tags as $tag) {
             $tagId = $this->prepare("
@@ -58,11 +81,7 @@ class Article extends \GF\DB\SimpleDB {
         }
     }
 
-    public function increaseViewsByOne($id) {
-        $this->prepare("UPDATE `articles` SET `visits`=visits + 1 WHERE id = ?", array($id))->execute();
-    }
-
-    public function deleteArticle($id) {
-        $this->prepare("DELETE FROM `articles` WHERE id = ?", array($id))->execute();
+    private function deleteTagsFromArticle($articleId) {
+        $this->prepare("DELETE FROM `articles_tags` WHERE article_id = ?", array($articleId))->execute();
     }
 }

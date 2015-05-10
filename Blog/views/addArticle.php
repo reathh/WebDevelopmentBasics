@@ -5,7 +5,7 @@
             <input type="text" id="title" name="title">
         </div>
         <div>
-            <label for="title">Tags:</label>
+            <label for="tags">Tags:</label>
             <input type="text" id="tags" name="tags">
         </div>
         <div>

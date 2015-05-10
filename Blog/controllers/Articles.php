@@ -74,6 +74,17 @@ class Articles extends \Controllers\DefaultBlogController {
 
         $articleId = $this->input->get(0);
         if ($articleId) {
+            if ($this->input->post('title') && $this->input->post('content')) {
+                try {
+                    $this->articleModel->editArticle($articleId,
+                        $this->input->post('title'),
+                        $this->input->post('tags'),
+                        $this->input->post('content'));
+                    echo 'Successfully edited article';
+                } catch (\Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
             $this->view->article = $this->articleModel->getArticleById($articleId);
             $this->view->appendToLayout('body', 'editArticle');
             $this->view->display('layouts.default');
