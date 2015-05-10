@@ -5,8 +5,9 @@ foreach($this->articles as $article) : ?>
 
     <div class="article">
         <a href="/index.php/Articles/view/<?=$article['id']?>" class="title"><h2><?=$article['title']?></h2></a>
-
-
+        <div class="visits">
+            <span>Visits: </span> <?=$article['visits']?>
+        </div>
         <?php
         if (count($article['tags']) != 0) : ?>
         <div class="tags">

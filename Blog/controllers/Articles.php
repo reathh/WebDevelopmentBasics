@@ -29,6 +29,62 @@ class Articles extends \Controllers\DefaultBlogController {
         $this->view->display('layouts.default');
     }
 
+    public function add() {
+        if (!$this->userModel->isUserAdmin()) {
+            Common::redirect($this->config->app['rootUrl']);
+            return;
+        }
+        if ($this->input->post('title') && $this->input->post('content')) {
+            try {
+                $this->articleModel->addArticle($this->input->post('title'), $this->input->post('tags'), $this->input->post('content'));
+                echo 'Successfully added article.';
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+        $this->view->appendToLayout('body', 'addArticle');
+        $this->view->display('layouts.default');
+    }
+
+    public function delete() {
+        if (!$this->userModel->isUserAdmin()) {
+            Common::redirect($this->config->app['rootUrl']);
+            return;
+        }
+
+        $articleId = $this->input->get(0);
+        if ($articleId) {
+            try {
+                $this->articleModel->deleteArticle($articleId);
+                echo 'Successfully deleted article';
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+        $this->view->articles = $this->articleModel->getAllArticleTitles();
+        $this->view->appendToLayout('body', 'listArticlesToDelete');
+        $this->view->display('layouts.default');
+    }
+
+    public function edit() {
+        if (!$this->userModel->isUserAdmin()) {
+            Common::redirect($this->config->app['rootUrl']);
+            return;
+        }
+
+        $articleId = $this->input->get(0);
+        if ($articleId) {
+            $this->view->article = $this->articleModel->getArticleById($articleId);
+            $this->view->appendToLayout('body', 'editArticle');
+            $this->view->display('layouts.default');
+        }
+        else {
+            $this->view->articles = $this->articleModel->getAllArticleTitles();
+            $this->view->appendToLayout('body', 'listArticlesToEdit');
+            $this->view->display('layouts.default');
+        }
+    }
+
     private function showAllArticles()
     {
         $articles = $this->articleModel->getAllArticles();
@@ -46,6 +102,8 @@ class Articles extends \Controllers\DefaultBlogController {
             }
         }
         $article = $this->articleModel->getArticleById($id);
+        $this->articleModel->increaseViewsByOne($id);
+
         $articleComments = $this->commentModel->getCommentsForArticle($id);
         $this->prepareTagsForView($article);
 
@@ -104,6 +162,5 @@ class Articles extends \Controllers\DefaultBlogController {
         $this->commentModel->addComment($id, $name, $email, $content);
 
     }
-
 
 }

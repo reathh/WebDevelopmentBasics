@@ -1,4 +1,4 @@
-.tags>span {
+.tags>span, .visits>span {
     color: gray;
     font-size: 0.8em;
 }
@@ -16,7 +16,7 @@
 .tags {
     margin-bottom: 10px;
 }
-.articles .article .title:hover {
+.articles .article .title:hover, header nav ul li a:hover {
     margin-bottom: 0;
     color: blue;
     text-decoration: underline;
@@ -52,4 +52,25 @@ header>div #username {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+}
+#add-article {
+    text-align: center;
+}
+header nav ul {
+    padding-left: 0;
+    list-style-type: none;
+    margin: 5px;
+}
+header nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+header nav ul li a{
+    text-decoration: none;
+    font-size: 1.2em;
+    color: dodgerblue;
+}
+#delete-articles td {
+    border: 1px solid black;
+    padding: 5px;
 }

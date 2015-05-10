@@ -32,7 +32,9 @@ class DefaultBlogController extends \GF\DefaultController {
         $this->userModel = new \Models\User();
         $this->commentModel = new \Models\Comment();
 
-        $this->view->user = array('isLoggedIn' => $this->userModel->isUserLoggedIn(), 'data' => $this->userModel->getCurrentlyLoggedUser());
+        $this->view->user = array('isLoggedIn' => $this->userModel->isUserLoggedIn(),
+                                    'data' => $this->userModel->getCurrentlyLoggedUser(),
+                                    'isAdmin' => $this->userModel->isUserAdmin());
         $this->view->appendToLayout('user', 'header');
 
         $tags = $this->tagModel->getAllTags();
