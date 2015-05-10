@@ -149,31 +149,6 @@ class Common {
             throw new \Exception('Invalid url', 500);
         }
     }
-
-    public static function redirectWhenUserIsNotLogged($url)
-    {
-        if (!$this->session->username) {
-            if ($url) {
-                header("Location: $url");
-                die;
-            } else {
-                throw new \Exception('Invalid url', 500);
-            }
-        }
-    }
-
-    public static function redirectWhenUserIsLogged($url)
-    {
-        if ($this->session->username) {
-            if ($url) {
-                header("Location: $url");
-                die;
-            } else {
-                throw new \Exception('Invalid url', 500);
-            }
-        }
-    }
-
 }
 
 
