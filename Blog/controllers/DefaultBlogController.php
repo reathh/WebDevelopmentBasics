@@ -40,6 +40,7 @@ class DefaultBlogController extends \GF\DefaultController {
         $this->view->appendToLayout('user', 'header');
 
         $this->populateTagsToView();
+        $this->populateLastArticlesToView();
 
         $f = \GF\FrontController::getInstance();
         $this->view->title = ucfirst($f->method) . ' ' . ucfirst($f->controller);
@@ -55,6 +56,11 @@ class DefaultBlogController extends \GF\DefaultController {
         }
         $this->view->tags = $tags;
         $this->view->maxSizeForTags = $this->config->blog['maxSizeForTags'];
-        $this->view->appendToLayout('tags', 'tags');
+        $this->view->appendToLayout('tags', 'partials.tags');
+    }
+
+    private function populateLastArticlesToView() {
+        $this->view->lastArticles = $this->articleModel->getAllArticles($this->config->blog['numberOfArticlesAtSidebar']);
+        $this->view->appendToLayout('lastArticles', 'partials.last-articles');
     }
 }

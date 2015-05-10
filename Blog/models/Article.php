@@ -6,15 +6,19 @@ namespace Models;
 use GF\Common;
 
 class Article extends \GF\DB\SimpleDB {
-    public function getAllArticles()
+    public function getAllArticles($limit = null)
     {
-       $articles = $this->prepare("
-            SELECT a.id, `title`, `content`, `visits`, `date_created`, GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
+        $sql = " SELECT a.id, `title`, `content`, `visits`, `date_created`, GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
             FROM `articles` AS a
             LEFT JOIN `articles_tags` AS at ON a.id = at.article_id
             LEFT JOIN `tags` AS t ON at.tag_id = t.id
             GROUP BY a.id
-            ORDER BY `date_created` DESC")->execute()->fetchAllAssoc();
+            ORDER BY `date_created` DESC";
+        if (is_numeric($limit)) {
+            $sql .= ' LIMIT ' . $limit;
+        }
+        
+       $articles = $this->prepare($sql)->execute()->fetchAllAssoc();
 
         for($i = 0; $i < count($articles); $i++) {
             $articles[$i]['title'] = Common::normalize($articles[$i]['title'], 'xss');

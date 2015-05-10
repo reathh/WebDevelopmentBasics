@@ -12,8 +12,14 @@
     <?=$this->getLayoutData('body');?>
 </main>
 <aside>
+    <div>
+        <h3>Last posts</h3>
+        <?=$this->getLayoutData('lastArticles');?>
+    </div>
+    <div>
     <h3>Tags</h3>
     <?=$this->getLayoutData('tags');?>
+    </div>
 </aside>
 </body>
 </html>
