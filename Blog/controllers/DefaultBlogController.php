@@ -41,5 +41,10 @@ class DefaultBlogController extends \GF\DefaultController {
         $this->view->tags = $tags;
         $this->view->appendToLayout('tags', 'tags');
 
+        $f = \GF\FrontController::getInstance();
+        $this->view->title = ucfirst($f->method) . ' ' . ucfirst($f->controller);
+        if ($this->input->get(0)) {
+            $this ->view->title .= ' ' . $this->input->get(0);
+        }
     }
 }

@@ -17,8 +17,8 @@ class FrontController {
 
     private static $_instance = null;
     private $ns = null;   
-    private $controller = null;
-    private $method = null;
+    public $controller = null;
+    public $method = null;
      /**
      *
      * @var \GF\Routers\iRouter;

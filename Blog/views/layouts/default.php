@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>The blog!</title>
+    <title><?=$this->title?></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
