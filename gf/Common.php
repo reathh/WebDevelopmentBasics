@@ -36,7 +36,7 @@ class Common {
                     $data=trim($data);
                 }
                 if($v=='xss'){
-                    $data=  self::xss_clean($data);
+                    $data=  htmlspecialchars(self::xss_clean($data));
                 }
             }
         }

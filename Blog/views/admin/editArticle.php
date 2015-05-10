@@ -1,5 +1,5 @@
 <div id="edit-article">
-    <a href="/index.php/Articles/edit">Go back to list of articles</a>
+    <a href="/Admin/Articles/edit">Go back to list of articles</a>
     <form method="post">
         <div>
             <label for="title">Title:</label>

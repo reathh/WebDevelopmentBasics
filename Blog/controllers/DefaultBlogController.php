@@ -3,6 +3,8 @@
 namespace Controllers;
 
 
+use GF\Common;
+
 class DefaultBlogController extends \GF\DefaultController {
     /**
      * @var \Models\Article
@@ -37,14 +39,22 @@ class DefaultBlogController extends \GF\DefaultController {
                                     'isAdmin' => $this->userModel->isUserAdmin());
         $this->view->appendToLayout('user', 'header');
 
-        $tags = $this->tagModel->getAllTags();
-        $this->view->tags = $tags;
-        $this->view->appendToLayout('tags', 'tags');
+        $this->populateTagsToView();
 
         $f = \GF\FrontController::getInstance();
         $this->view->title = ucfirst($f->method) . ' ' . ucfirst($f->controller);
         if ($this->input->get(0)) {
             $this ->view->title .= ' ' . $this->input->get(0);
         }
+    }
+
+    private function populateTagsToView() {
+        $tags = $this->tagModel->getAllTags();
+        for($i = 0; $i < count($tags); $i++) {
+            $tags[$i]['count'] = $this->config->blog['startingSizeForTags'] + Common::normalize($this->tagModel->getCountOfQuestionsByTagName($tags[$i]['name']), 'int');
+        }
+        $this->view->tags = $tags;
+        $this->view->maxSizeForTags = $this->config->blog['maxSizeForTags'];
+        $this->view->appendToLayout('tags', 'tags');
     }
 }

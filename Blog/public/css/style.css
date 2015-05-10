@@ -4,11 +4,16 @@
 }
 .articles .article {
     border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
     margin-bottom: 15px;
 }
 .articles .article .title {
     color: dodgerblue;
     text-decoration: none;
+}
+.articles .article .title h2 {
+    margin-top: 0;
 }
 .articles .article .title, .articles .article .title * {
     margin-bottom: 0;
@@ -25,12 +30,16 @@
     display: inline-block;
 }
 #default {
-    width: 80%;
+    width: 82%;
 
 }
 aside {
-    width: 19%;
+    margin-left: 10px;
+    width: 15%;
     border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    vertical-align: top;
 }
 header>div {
     text-align: center;

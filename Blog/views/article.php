@@ -4,7 +4,7 @@ if (count($this->article['tags']) != 0) : ?>
 <div class="tags">
     <span>Tags:</span>
     <?php foreach($this->article['tags'] as $tag) : ?>
-        <a href="/index.php/Articles/tags/<?=$tag?>"><?=$tag?></a>
+        <a href="/Articles/tags/<?=$tag?>"><?=$tag?></a>
     <?php endforeach; echo '</div>'; endif; ?>
 <div id="article-content"><?=$this->article['content']?></div>
 <div class="comments">

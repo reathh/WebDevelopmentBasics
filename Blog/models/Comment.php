@@ -9,6 +9,8 @@
 namespace Models;
 
 
+use GF\Common;
+
 class Comment extends \GF\DB\SimpleDB {
     public function addComment($articleId, $name, $email, $content) {
         $this->prepare("INSERT INTO comments (article_id, name, email, content)
@@ -16,7 +18,13 @@ class Comment extends \GF\DB\SimpleDB {
     }
 
     public function getCommentsForArticle($articleId) {
-        return $this->prepare("SELECT * FROM comments
+        $comments = $this->prepare("SELECT * FROM comments
                                 WHERE article_id = ?", array($articleId))->execute()->fetchAllAssoc();
+        for ($i = 0; $i < count($comments); $i++) {
+            $comments[$i]['content'] = Common::normalize($comments[$i]['content'], 'xss');
+            $comments[$i]['name'] = Common::normalize($comments[$i]['name'], 'xss|trim');
+            $comments[$i]['email'] = Common::normalize($comments[$i]['email'], 'xss|trim');
+        }
+        return $comments;
     }
 }
