@@ -1,6 +1,9 @@
-.tags>span, .visits>span {
+.article .tags>span, .article .visits>span, .article .date>span {
     color: gray;
     font-size: 0.8em;
+}
+.article .visits, .article .date {
+    display: inline-block;
 }
 .articles .article {
     border: 1px solid black;

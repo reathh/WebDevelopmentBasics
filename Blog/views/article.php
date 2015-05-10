@@ -11,6 +11,7 @@ if (count($this->article['tags']) != 0) : ?>
     <?php foreach ($this->comments as $comment) : ?>
         <div class="comment">
             <div class="user-data">
+                Date: <span class="name"><?=$comment['date_created']?></span>
                 Name: <span class="name"><?=$comment['name']?></span>
                 <?php if ($comment['email']) : ?> - Email: <span class="email"><?=$comment['email']?></span> <?php endif ?>
             </div>

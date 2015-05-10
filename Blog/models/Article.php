@@ -9,14 +9,17 @@ class Article extends \GF\DB\SimpleDB {
     public function getAllArticles()
     {
        $articles = $this->prepare("
-            SELECT a.id, `title`, `content`, `visits`, GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
+            SELECT a.id, `title`, `content`, `visits`, `date_created`, GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
             FROM `articles` AS a
             LEFT JOIN `articles_tags` AS at ON a.id = at.article_id
             LEFT JOIN `tags` AS t ON at.tag_id = t.id
-            GROUP BY a.id")->execute()->fetchAllAssoc();
+            GROUP BY a.id
+            ORDER BY `date_created` DESC")->execute()->fetchAllAssoc();
 
         for($i = 0; $i < count($articles); $i++) {
             $articles[$i]['title'] = Common::normalize($articles[$i]['title'], 'xss');
+            $date = new \DateTime($articles[$i]['date_created']);
+            $articles[$i]['date_created'] = $date->format('j-F-Y G:i');
         }
         return $articles;
     }

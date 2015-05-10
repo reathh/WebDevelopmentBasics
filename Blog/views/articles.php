@@ -5,6 +5,9 @@ foreach($this->articles as $article) : ?>
 
     <div class="article">
         <a href="/Articles/view/<?=$article['id']?>" class="title"><h2><?=$article['title']?></h2></a>
+        <div class="date">
+            <span>Date: </span> <?=$article['date_created']?>
+        </div>
         <div class="visits">
             <span>Visits: </span> <?=$article['visits']?>
         </div>
